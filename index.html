@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChainEx — Роллер сообщество</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo-wrapper">
+                <img src="images/logo.png" alt="ChainEx" class="header__logo-img" onerror="this.style.display='none'; this.nextSibling.style.display='block'">
+                <a href="index.html" class="header__logo">ChainEx</a>
+            </div>
+            <div class="header__burger" id="burger">☰</div>
+            <nav class="header__nav" id="nav">
+                <a href="index.html" class="header__link header__link--active">Главная</a>
+                <a href="rides.html" class="header__link">Покатушки</a>
+                <a href="articles.html" class="header__link">Статьи</a>
+                <a href="faq.html" class="header__link">Вопрос-ответ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero hero--with-bg">
+            <div class="hero__bg">
+                <img src="images/hero-bg.jpg" alt="Роллеры" class="hero__image" onerror="this.style.display='none'">
+            </div>
+            <div class="container hero__content">
+                <h1 class="hero__title">Веселая компашка роллеров «Чайники-Экстремалы»</h1>
+                <p class="hero__subtitle">Приглашаем катать вместе дружной компанией! Покатушки проводятся по северу и северо-западу города. Бывает и по другим районам.</p>
+            </div>
+        </section>
+
+        <section class="carousel-section">
+            <div class="container">
+                <h1 class="section-title section-title--left">Афиша мероприятий</h1>
+                <div class="carousel">
+                    <button class="carousel__btn carousel__btn--prev" id="carouselPrev">❮</button>
+                    <div class="carousel__track-container">
+                        <div class="carousel__track" id="carouselTrack"></div>
+                    </div>
+                    <button class="carousel__btn carousel__btn--next" id="carouselNext">❯</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-community">
+            <div class="container">
+                <div class="about-community__wrapper">
+                    <div class="about-community__text">
+                        <h1 class="section-title section-title--left">Кто мы такие?</h1>
+                        <p>ChainEx — это не просто роллер-сообщество, а настоящая семья, объединённая любовью к скорости, ветру и роликам!</p>
+                        <p>Мы собираемся уже <strong>больше двух лет</strong>, и за это время провели <strong>более 150 покатушек</strong> разного уровня сложности — от ультралайта до быстрых темповых заездов.</p>
+                        <p>В нашем ПАКе <strong>более 2000 участников</strong> в соцсетях, и каждый может найти покатушку по душе. Присоединяйся — у нас весело, драйвово и по-семейному тепло!</p>
+                    </div>
+                    <div class="about-community__image">
+                        <img src="images/aboutus.jpg" alt="ChainEx community" onerror="this.src='https://placehold.co/400x300?text=ChainEx'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="leaders">
+            <div class="container">
+                <h1 class="section-title">Наши ведущие</h1>
+                <div class="leaders__grid">
+                    <div class="leader-card">
+                        <img src="images/ved1.png" alt="Алексей Самарин" class="leader-card__img">
+                        <h3>Алексей Самарин</h3>
+                        <p>Ведущий Темповых</p>
+                        <div class="leader-card__contacts">@al_samarin</div>
+                    </div>
+                    <div class="leader-card">
+                        <img src="images/ved2.png" alt="Елена Крылова" class="leader-card__img">
+                        <h3>Елена Крылова</h3>
+                        <p>Душевный ЛАЙТ</p>
+                        <div class="leader-card__contacts">@ekrylova</div>
+                    </div>
+                    <div class="leader-card">
+                        <img src="images/ved3.png" alt="Андрей Пышкин" class="leader-card__img">
+                        <h3>Андрей Пышкин</h3>
+                        <p>Предводитель тюленей</p>
+                        <div class="leader-card__contacts">@pishkin_and</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__social">
+                <a href="https://t.me/+fnqPfX-vsQVmZWNi">Telegram чат</a>
+                <a href="https://vk.me/join/92tXtql44DBd1jFhWO5o3m31cNhzG6LH1RU=">VK чат</a>
+                <a href="https://t.me/chainexpak">Telegram канал</a>
+                <a href="https://vk.com/chainex">VK группа</a>
+            </div>
+            <p>© 2026 ChainEx</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+</body>
+</html>

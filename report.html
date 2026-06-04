@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChainEx — Отчёт о покатушке</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #f0f2f5;
+        }
+        main {
+            flex: 1;
+            padding-top: 30px;
+        }
+        .report-simple {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .report-simple__header {
+            position: relative;
+            padding: 80px 50px;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .report-simple__header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7));
+            z-index: 1;
+        }
+        .report-simple__header h1,
+        .report-simple__header p {
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        .report-simple__header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .report-simple__header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .report-simple__content {
+            padding: 40px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .stat-card__value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #9b59b6;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .gallery img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.02);
+        }
+        .report-description {
+            font-size: 1.1rem;
+            margin: 20px 0;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+        .fixed-back-btn {
+            position: fixed;
+            top: 120px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(155, 89, 182, 0.7);
+            backdrop-filter: blur(4px);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .fixed-back-btn:hover {
+            background: rgba(155, 89, 182, 0.9);
+            transform: translateX(-3px);
+        }
+        @media (max-width: 768px) {
+            .fixed-back-btn {
+                top: 100px;
+                left: 15px;
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            .report-simple__header {
+                padding: 50px 20px;
+                min-height: 220px;
+            }
+            .report-simple__header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="rides.html" class="fixed-back-btn">← Назад</a>
+
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo-wrapper">
+                <img src="images/logo.png" alt="ChainEx" class="header__logo-img" onerror="this.style.display='none'; this.nextSibling.style.display='block'">
+                <a href="index.html" class="header__logo">ChainEx</a>
+            </div>
+            <div class="header__burger" id="burger">☰</div>
+            <nav class="header__nav" id="nav">
+                <a href="index.html" class="header__link">Главная</a>
+                <a href="rides.html" class="header__link">Покатушки</a>
+                <a href="articles.html" class="header__link">Статьи</a>
+                <a href="faq.html" class="header__link">Вопрос-ответ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div id="reportContent" class="report-simple">Загрузка...</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__social">
+                <a href="https://t.me/+fnqPfX-vsQVmZWNi">Telegram чат</a>
+                <a href="https://vk.me/join/92tXtql44DBd1jFhWO5o3m31cNhzG6LH1RU=">VK чат</a>
+                <a href="https://t.me/chainexpak">Telegram канал</a>
+                <a href="https://vk.com/chainex">VK группа</a>
+            </div>
+            <p>© 2026 ChainEx</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const reportsData = [
+            {
+                id: 5,
+                title: "1я Загородная 2026",
+                date: "17 мая 2026",
+                location: "Зеленогорск",
+                participants: 11,
+                distance: 65,
+                avgSpeed: 17,
+                photos: 4,
+                headerBg: "images/ride_past1.jpg",
+                description: `Загородные покатушки это как правило совершенно другой формат катания в сравнении с городом, когда на первый план выходит дистанционное катание, практически без остановок и при этом даже с небольшим рельефом.
+
+ПЕРВАЯ Загородная покатушка ПАКа Среднетемповых "1я Загородная 2026" #17 состоялась и запомнилась интересными моментами, которых ранее не бывало !!!
+С погодой повезло, приятные +17. После ночного дождика подсохло и больше не поливало, а вот ветер был северо-западный слабый, но постоянно встречный !!!
+
+💥💥💥💥💥💥💥💥💥
+
+Порадовала как обычно дорожка к шалашу, чуть добавилось теристости между Репино и Комарово перед "набережной" (2 участка метров по 150 прям с ацким асфальтом), чуть трещин на дорожке перед Солнечным, и да МОСТ после Сестрорецка над жд отправился на ремонт. Это было сложно, оставлена 1 узкая полоса проезда в каждую сторону, а обход пешеходам доступен по бетонным плитам, которые криво лежат и спускаются вниз к жд. Ехали по проежке навстречу транспорту, по сути остановили поток, водители были благодушны, понимая, что по другому нам никак.
+
+ВПЕРВЫЕ на покатушке проехали по 💪💪💪ГРАНД подъему💪💪💪 в Комарово. Проехали и сразу обновили рекорд этого Подъема в Страве !!! Для тех, кто не знает, эта стена высотой 27 метров (не путать с более пологим заездом и меньшей высотой по ул. Кавалерийская). Это произошло после того, как покатушка преодалела 50км, и настал момент подъема в Комарово. Высота в 1,5 Яхтенных моста, собранная достаточно круто вверх. Далее наш ждал еще и ☠☠☠ ГРАНД СПУСК ☠☠☠, это ныряющий вниз за поворот спуск с приличным перепадом и резким ускорением вниз (с выкатом правда). Выглядело страшно, частично спустились и съехали, и даже без доп 7-8 метров крутого спуска, скорость достигла 40 в час. Т.к. все были предупреждены, никто не упал (а падать там это ...) и мы съехали максимально осторожно (потратив лишние 3-4 минуты).
+
+65,4км, 4часа 1 минута (при плане 4часа 7минут), ССД 20.1, ССО 16.4 (фактически за вычетом потери на спуске 3-4 мин, более частых фото и пары тех остановок ССО 16.8-17).
+
+11 на старте (9 человек основной ПАК + 2 вела). В Разливе 9, далее всемером !!!
+Ощущение праздника, впечатление, что дорожка в Зеленогорск никогда не заканчивается!!! И да, она продолжается до ВОСТОК-6 еще 15+ км, надеюсь соберемся и доедем !!!
+
+Спасибо всем кто катил и поддержал. Вы молодцы, не спасовали перед ГРАНД подъемом. Нашим стартовавшим велосипедистам спасибо за участие !!!`,
+                images: ["images/reports/6.jpg", "images/reports/7.jpg", "images/reports/8.jpg", "images/reports/9.jpg"]
+            },
+            {
+                id: 6,
+                title: "Новичковая тренировка + покатушка!",
+                date: "16 мая 2026",
+                location: "Муринский парк",
+                participants: 15,
+                distance: 12,
+                avgSpeed: 8,
+                photos: 5,
+                headerBg: "images/ride_past2.jpg",
+                description: `Тренировка и покатушка для новичков прошла успешно!🤗
+Хороший человек провел тренировки для двух групп! За что ему спасибо огромное от всех☺
+Приехали и лосики, которые получили отдельное задание осваивать необходимые навыки копытных! 🦌
+Но были и новички, которые получили более легкую тренировку, но тоже безумно важную в освоении своих колесиков!‼💪
+После чего проехали 12км, как и планировали! Все молодцы и справились хорошо!😇
+
+Ну а дальнейший выгул коней и тюленей на 20+км произошел обычным образом🤷‍♂
+Фоточки в альбоме и часть в тг чатике!🤫`,
+                images: ["images/reports/1.jpg", "images/reports/2.jpg", "images/reports/3.jpg", "images/reports/4.jpg", "images/reports/5.jpg"]
+            }
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const reportId = parseInt(urlParams.get('id'));
+        const report = reportsData.find(r => r.id === reportId);
+        const container = document.getElementById('reportContent');
+
+        if (report) {
+            const headerBgStyle = report.headerBg ? `background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${report.headerBg}');` : 'background: linear-gradient(135deg, #9b59b6, #2ecc71);';
+            container.innerHTML = `
+                <div class="report-simple__header" style="${headerBgStyle} background-size: cover; background-position: center;">
+                    <div>
+                        <h1>${report.title}</h1>
+                        <p>${report.date} • ${report.location}</p>
+                    </div>
+                </div>
+                <div class="report-simple__content">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-card__value">${report.participants}</div>
+                            <div>участников</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__value">${report.distance} км</div>
+                            <div>дистанция</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__value">${report.avgSpeed} км/ч</div>
+                            <div>средняя скорость</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-card__value">${report.photos}</div>
+                            <div>фото</div>
+                        </div>
+                    </div>
+                    <div class="report-description">${report.description}</div>
+                    <h2>Фотографии</h2>
+                    <div class="gallery">
+                        ${report.images.map(img => `<img src="${img}" alt="Фото">`).join('')}
+                    </div>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 50px;">
+                    <h2>Отчёт не найден...</h2>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

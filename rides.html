@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChainEx — Покатушки</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        .collapse-section {
+            margin-bottom: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+        .collapse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            cursor: pointer;
+            background: #ffffff;
+            transition: background 0.3s;
+        }
+        .collapse-header:hover {
+            background: #ebedee;
+        }
+        .collapse-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+        .collapse-arrow {
+            transition: transform 0.3s ease;
+            font-size: 1.2rem;
+            color: #9b59b6;
+        }
+        .collapse-section.active .collapse-arrow {
+            transform: rotate(180deg);
+        }
+        .collapse-content {
+            display: none;
+            padding: 20px 25px;
+            background: #ffffff;
+        }
+        .collapse-section.active .collapse-content {
+            display: block;
+        }
+        .ride-types__list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .ride-type-btn {
+            padding: 8px 20px;
+            border: 2px solid #9b59b6;
+            background: transparent;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .ride-type-btn:hover,
+        .ride-type-btn.active {
+            background: #9b59b6;
+            color: white;
+        }
+        .ride-list-item {
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+            min-height: 180px;
+            margin-bottom: 20px;
+        }
+        .ride-list-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+            border-radius: 15px;
+            z-index: 1;
+        }
+        .ride-list-item:last-child {
+            margin-bottom: 0;
+        }
+        .ride-list-item__info {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            flex: 2;
+        }
+        .ride-list-item__info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+        .ride-list-item__actions {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .past-ride-item {
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: relative;
+            min-height: 180px;
+            margin-bottom: 20px;
+        }
+        .past-ride-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            top: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+            border-radius: 15px;
+            z-index: 1;
+        }
+        .past-ride-item:last-child {
+            margin-bottom: 0;
+        }
+        .past-ride-item__info {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .past-ride-item__info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+        .past-ride-item__actions {
+            position: relative;
+            z-index: 2;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        .ride-count {
+            font-weight: bold;
+            color: #2ecc71;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+        .map-widget {
+            width: 100%;
+            margin: 15px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .map-widget iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo-wrapper">
+                <img src="images/logo.png" alt="ChainEx" class="header__logo-img" onerror="this.style.display='none'; this.nextSibling.style.display='block'">
+                <a href="index.html" class="header__logo">ChainEx</a>
+            </div>
+            <div class="header__burger" id="burger">☰</div>
+            <nav class="header__nav" id="nav">
+                <a href="index.html" class="header__link">Главная</a>
+                <a href="rides.html" class="header__link header__link--active">Покатушки</a>
+                <a href="articles.html" class="header__link">Статьи</a>
+                <a href="faq.html" class="header__link">Вопрос-ответ</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Покатушки</h1>
+
+            <div class="collapse-section active" id="upcomingSection" style="margin-top: 40px;">
+                <div class="collapse-header">
+                    <h2>Предстоящие</h2>
+                    <span class="collapse-arrow">▼</span>
+                </div>
+                <div class="collapse-content">
+                    <div class="ride-types__list">
+                        <button class="ride-type-btn active" data-type="all">Все</button>
+                        <button class="ride-type-btn" data-type="УльтраЛАЙТ">УльтраЛАЙТ</button>
+                        <button class="ride-type-btn" data-type="ЛАЙТ">ЛАЙТ</button>
+                        <button class="ride-type-btn" data-type="ЛАЙТ+">ЛАЙТ+</button>
+                        <button class="ride-type-btn" data-type="СРЕДНЯЯ">СРЕДНЯЯ</button>
+                        <button class="ride-type-btn" data-type="СРЕДНЕБЫСТРАЯ">СРЕДНЕБЫСТРАЯ</button>
+                        <button class="ride-type-btn" data-type="БЫСТРАЯ">БЫСТРАЯ</button>
+                    </div>
+                    <div id="upcomingRidesList"></div>
+                </div>
+            </div>
+
+            <div class="collapse-section" id="pastSection">
+                <div class="collapse-header">
+                    <h2>Прошедшие</h2>
+                    <span class="collapse-arrow">▼</span>
+                </div>
+                <div class="collapse-content">
+                    <div id="pastRidesList"></div>
+                </div>
+            </div>
+
+            <section class="routes">
+                <h1>Готовые маршруты</h1>
+                <div class="routes-grid" id="routesGrid"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__social">
+                <a href="https://t.me/+fnqPfX-vsQVmZWNi">Telegram чат</a>
+                <a href="https://vk.me/join/92tXtql44DBd1jFhWO5o3m31cNhzG6LH1RU=">VK чат</a>
+                <a href="https://t.me/chainexpak">Telegram канал</a>
+                <a href="https://vk.com/chainex">VK группа</a>
+            </div>
+            <p>© 2026 ChainEx</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/rides.js"></script>
+    <script>
+        document.querySelectorAll('.collapse-section').forEach(section => {
+            const header = section.querySelector('.collapse-header');
+            header.addEventListener('click', () => {
+                section.classList.toggle('active');
+            });
+        });
+
+        document.querySelectorAll('.ride-type-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.type;
+                document.querySelectorAll('.ride-type-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                if (window.setFilter) {
+                    window.setFilter(filter);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
